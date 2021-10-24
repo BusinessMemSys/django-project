@@ -8,7 +8,7 @@ SECRET_KEY = 'django-insecure-esp68+ox!l&0f-wij_5@yxf8)bswwpq6wloro3a%w*uq)5sr66
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1','sampledomain.com']
+ALLOWED_HOSTS = ['127.0.0.1','chill-web-site.herokuapp.com']
 
 
 
