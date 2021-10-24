@@ -1,0 +1,87 @@
+{% extends "index.html" %}
+{% load static %}
+{% block title %}Радио{% endblock %}
+{% block content %}
+    <section class="showcase">
+        <header>
+                <a href={% url 'home' %}><h2 class="logo">Just Chill It</h2></a>
+                <div class="hello">
+                    {% if user.is_authenticated %}
+                        <ul>
+                        <li><a href="#">{{ user.username }}</a>
+                            <ul>
+                                <li><a href="{% url 'password_change' %}">Поменять пароль</a></li>
+                                <li>
+                                    {% if user.is_superuser %}
+                                    <a href="{% url 'article_new' %}">Добавить новость</a>
+                                    {% endif %}
+                                </li>
+                                <li><a href="{% url 'logout' %}">Выйти</a><p></li>
+                            </ul>
+                        </li>
+                
+                    {% else %}
+                <div class="login">
+                    <a href="{% url 'login' %}"> Войти</a>
+                    <a href="{% url 'signup' %}">Зарегистрироваться</a>
+                    {% endif %}
+                </div>
+                </div>
+                <div class="toggle"></div>
+            </header>
+        <div class="slider middle">
+            <div class="slides">
+                <input type="radio" name="r" id="r1" checked>
+                <input type="radio" name="r" id="r2">
+                <input type="radio" name="r" id="r3">
+
+                <div class="slide s1"><img src="{% static 'gif/1.gif'%}" alt=""></div>
+                <div class="slide"><img src="{% static 'gif/2.gif'%}" alt=""></div>
+                <div class="slide"><img src="{% static 'gif/3.gif'%}" alt=""></div>
+            </div>
+
+            <div class="navigation">
+                <label for="r1" class="bar"></label>
+                <label for="r2" class="bar"></label>
+                <label for="r3" class="bar"></label>
+            </div>
+        </div>
+        <div class="radio_cont">
+            <div id="radiobells_container"><a href="https://www.radiobells.com/" rel="nofollow" id="RP_link">
+                Онлайн радио</a> #radiobells_script_hash</div><link href="https://www.radiobells.com/script/style.css"
+                 type="text/css" rel="stylesheet" /><script type="text/javascript">var rad_backcolor="#434242";
+                  var rad_logo = "black"; var rad_autoplay = false; var rad_width = "responsive"; var rad_width_px = 330;
+                  var rad_stations =[['https://stream.zeno.fm/7w72va6s7k0uv','LoFi World','lofiworld'],
+                  ['https://stream.zeno.fm/n35hs4hcmzzuv','Lounge Vibes','loungevibes'],['https://79.111.14.76:8002/chillout','Radio Caprice - Chill Out','capricechillout'],
+                  ['https://dfm-spoknochi.hostingradio.ru/spoknochi96.aacp','DFM Chill','dfmchill'],['https://cast.radiogroup.com.ua/loungefm','Lounge FM Chill-out','loungechillout'],
+                  ['https://radio4.cdm-radio.com:18020/stream-mp3-Chill','Costa Del Mar: Chillout','costadelmarchillout'],
+                  ['https://sectorradio.com/geny-mp3','Sector Geny  / 80s','sectorgeny']];</script><script type="text/javascript" 
+                  src="https://www.radiobells.com/script/v2_1.js" charset="UTF-8"></script>
+        </div>
+        <ul class="social">
+            <li><a href="https://ru-ru.facebook.com/" target="_blank"><img src="https://i.ibb.co/x7P24fL/facebook.png"></a></li>
+            <li><a href="https://twitter.com/" target="_blank"><img src="https://i.ibb.co/Wnxq2Nq/twitter.png"></a></li>
+            <li><a href="https://www.instagram.com/" target="_blank"><img src="https://i.ibb.co/ySwtH4B/instagram.png"></a></li>
+        </ul>
+    </section>
+
+    <div class="menu">
+        <div class="menu_settings">
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="#">Radio</a></li>
+                <li><a href="{% url 'article_list' %}">Articles</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        const menuToggle = document.querySelector('.toggle')
+        const showCase = document.querySelector('.showcase')
+
+        menuToggle.addEventListener('click', function() {
+            menuToggle.classList.toggle('active')
+            showCase.classList.toggle('active')
+        })
+    </script>
+{% endblock %}

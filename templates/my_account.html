@@ -1,0 +1,62 @@
+{% extends "index.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}Мой аккаунт{% endblock %}
+
+{% block content %}
+    <section class="showcase">
+            <header>
+                <h2 class="logo">Just Chill It</h2>
+                <div class="toggle"></div>
+            </header>
+
+            <video src="{% static 'mp4/relax_video.mp4'%}" muted loop autoplay></video>
+
+            <div class="overlay"></div>
+
+            <div class="text">
+                <h2>Привет, {{ user.username }}</h2>
+                <h3>Be yourself!</h3>
+                </br>
+                <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Upload</button>
+                </form>
+
+                {% if img_obj %}
+                <h3>Succesfully uploaded : {{img_obj.title}}</h3>
+                <img src="{{ img_obj.image.url}}" alt="connect" style="max-height:300px">
+                {% endif %}
+                <a href="#" style="cursor:default">Chill</a>
+            </div>
+            
+            <ul class="social">
+                <li><a href="https://ru-ru.facebook.com/" target="_blank"><img src="https://i.ibb.co/x7P24fL/facebook.png"></a></li>
+                <li><a href="https://twitter.com/" target="_blank"><img src="https://i.ibb.co/Wnxq2Nq/twitter.png"></a></li>
+                <li><a href="https://www.instagram.com/" target="_blank"><img src="https://i.ibb.co/ySwtH4B/instagram.png"></a></li>
+            </ul>
+        </section>
+
+        <div class="menu">
+            <div class="menu_settings">
+                <ul>
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'radio' %}">Radio</a></li>
+                    <li><a href="{% url 'about' %}">About</a></li>
+                    {% if user.is_authenticated %}
+                    <li><a href="#">My account</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+        <script>
+            const menuToggle = document.querySelector('.toggle')
+            const showCase = document.querySelector('.showcase')
+
+            menuToggle.addEventListener('click', function() {
+                menuToggle.classList.toggle('active')
+                showCase.classList.toggle('active')
+            })
+        </script>
+{% endblock content%}

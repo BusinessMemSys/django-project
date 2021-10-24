@@ -1,0 +1,79 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block title %}{{ article.title }}{% endblock%}
+
+{% block content %}
+    <section class="showcase">
+            <header>
+                <a href={% url 'home' %}><h2 class="logo">Just Chill It</h2></a>
+                <div class="hello">
+                    {% if user.is_authenticated %}
+                        <ul>
+                        <li><a href="#">{{ user.username }}</a>
+                            <ul>
+                                <li><a href="{% url 'password_change' %}">Поменять пароль</a></li>
+                                <li>
+                                    {% if user.is_superuser %}
+                                    <a href="{% url 'article_new' %}">Добавить новость</a>
+                                    {% endif %}
+                                </li>
+                                <li><a href="{% url 'logout' %}">Выйти</a><p></li>
+                            </ul>
+                        </li>
+                
+                    {% else %}
+                <div class="login">
+                    <a href="{% url 'login' %}"> Войти</a>
+                    <a href="{% url 'signup' %}">Зарегистрироваться</a>
+                    {% endif %}
+                </div>
+                </div>
+                <div class="toggle"></div>
+            </header>
+
+            <video src="{% static 'mp4/relax_video.mp4'%}" muted loop autoplay></video>
+
+            <div class="overlay"></div>
+
+            <div class="text">
+                    {% for article in object_list %}
+                    <div class="card">
+                    <h2><span class="font-weight-bold"><strong>{{ article.title }}</strong></span>
+                    <span class="text-muted">by {{ article.author }}</span></h2>
+                    </div>
+                    <div class="card-body">
+                    {{article.body }}
+                    </div>
+                    <div class="card-footer text-center text-muted">
+                    <a href="{% url 'article_edit' article.pk %}">Изменить</a> |<a href="{% url 'article_delete' article.pk %}">Удалить</a>
+                    </div> </div>
+                    <br/>
+            </div>
+            
+            <ul class="social">
+                <li><a href="https://ru-ru.facebook.com/" target="_blank"><img src="https://i.ibb.co/x7P24fL/facebook.png"></a></li>
+                <li><a href="https://twitter.com/" target="_blank"><img src="https://i.ibb.co/Wnxq2Nq/twitter.png"></a></li>
+                <li><a href="https://www.instagram.com/" target="_blank"><img src="https://i.ibb.co/ySwtH4B/instagram.png"></a></li>
+            </ul>
+        </section>
+
+        <div class="menu">
+            <div class="menu_settings">
+                <ul>
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'radio' %}">Radio</a></li>
+                    <li><a href="{% url 'article_list' %}">Articles</a></li>
+                    <li><a href="{% url 'about' %}">About</a></li>                  
+                </ul>
+            </div>
+        </div>
+        <script>
+            const menuToggle = document.querySelector('.toggle')
+            const showCase = document.querySelector('.showcase')
+
+            menuToggle.addEventListener('click', function() {
+                menuToggle.classList.toggle('active')
+                showCase.classList.toggle('active')
+            })
+        </script>
+{% endblock %}
