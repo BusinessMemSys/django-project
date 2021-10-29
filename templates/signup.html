@@ -1,11 +1,12 @@
-{% extends "index.html" %}
-{% load static %}
-{% block title %}Главное{% endblock %}
+{% extends 'index.html' %}
+{% load static%}
+{% load crispy_forms_tags %}
+{% block title %}Регистрация{% endblock %}
 
 {% block content %}
     <section class="showcase">
             <header>
-                <a href={% url 'home' %}><h2 class="logo">Just Chill It</h2></a>
+                <h2 class="logo">Just Chill It</h2>
                 <div class="hello">
                     {% if user.is_authenticated %}
                         <ul>
@@ -31,14 +32,24 @@
                 <div class="toggle"></div>
             </header>
 
-            <img src="{% static 'gif/relax_video.gif'%}" alt="" style="position: absolute; top: 0; left: 0; width: 100%;
-            height: 100%; object-fit: cover; opacity: 0.8;"> 
+            <video src="{% static 'mp4/relax_video.mp4'%}" muted loop autoplay></video>
+
             <div class="overlay"></div>
 
             <div class="text">
-                <h2>Don't Worry</h2>
-                <h3>Be yourself!</h3>
-                <a href="#" style="cursor:default">Chill</a>
+                <div class='fff'>
+                    <h2>Регистрация</h2>
+                    <div class="forms">
+                        <form method='post'>
+                            {% csrf_token %}
+                            {{ form|crispy }}
+                            <button class="btn btn-success">Зарегистрироваться</button>
+                        </form>
+                    </div>
+                    
+                </div>
+            
+                
             </div>
             
             <ul class="social">
@@ -46,15 +57,15 @@
                 <li><a href="https://twitter.com/" target="_blank"><img src="https://i.ibb.co/Wnxq2Nq/twitter.png"></a></li>
                 <li><a href="https://www.instagram.com/" target="_blank"><img src="https://i.ibb.co/ySwtH4B/instagram.png"></a></li>
             </ul>
-        </section>
+    </section>
 
         <div class="menu">
             <div class="menu_settings">
                 <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="{% url 'radio' %}">Radio</a></li>
-                    <li><a href="{% url 'article_list' %}">Articles</a></li>
-                    <li><a href="{% url 'about' %}">About</a></li>                  
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'radio' %}">Radio</a></li>
+                <li><a href="{% url 'article_list' %}">Articles</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
                 </ul>
             </div>
         </div>
@@ -68,3 +79,6 @@
             })
         </script>
 {% endblock %}
+
+
+

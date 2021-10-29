@@ -31,23 +31,40 @@
                 <div class="toggle"></div>
             </header>
 
-            <video src="{% static 'mp4/relax_video.mp4'%}" muted loop autoplay></video>
 
             <div class="overlay"></div>
 
             
             <div class="article-entry">
-                <div class="text-article">
+                <div class="text-article" >
                     <h2>{{ object.title }}</h2>
-                    <hr/><br/><br/><br/><br/>
-                    <p> {{ object.body }}</p>
+                    {% if object.cover.url%}
+                    <div class="text-article-img">
+                    <img src="{{ object.cover.url }}" style="width:950px; height: 400px">
+                    </div>
+                    {% endif %}
+                    <hr/><br/><br/><br/>
+                    <p style="font-size:18px;"> {{ object.body }}</p>
                 
                 {% if user == object.author %}
                     <p>by {{ object.author }} | {{ object.date }}</p><p><a href="{% url 'article_edit' article.pk%}">Изменить</a> | <a href="{% url 'article_delete' article.pk %}">Удалить</a></p>
                 {% endif %}
-                
                 </div> 
                 <p>Назад к другим <a href="{% url 'article_list'%}">Новостям</a></p>
+                <br><br><br>
+                    {% comment %} <h4>Комментарии</h4>
+                    <br>
+                        {% for comment in article.comments.all %}
+                        {{comment.author}} {{ comment }}<br><br>
+                        {% endfor %}  
+                    <form action="" method="post">{% csrf_token %}
+                    {{ form.as_p }}
+                    <button class="btn btn-info ml-2" type='submit'>Обновить</button>
+                    </form></div>              {% endcomment %}
+
+            </div>
+            <div class="comment">
+
             </div>
             
             <ul class="social">

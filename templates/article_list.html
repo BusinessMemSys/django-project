@@ -30,16 +30,20 @@
                 <div class="toggle"></div>
             </header>
 
-            <video src="{% static 'mp4/relax_video.mp4'%}" muted loop autoplay></video>
+
 
             <div class="overlay"></div>
-            <div class="text-articles-list">
+            <div class="text-articles-list" style="font-size:18px;"><br>
                 {% for article in object_list %}
                 
                 <h3><a href="{% url 'article_detail' article.pk %}"> <span >{{ article.title }}</span></a></h3><hr/></br></br>
                     
+                    <div class="text-article-img">
+                    <img src="{{ article.cover.url }}" style="width:700px; height: 500px; margin-left: 300px;">
+                    </div>
                     
-                    {{article.body|truncatechars:250 }} <a href="{% url 'article_detail' article.pk %}">   Читать далее</a><hr/>        
+                    
+                    {{article.body|truncatechars:550 }} <a href="{% url 'article_detail' article.pk %}">   Читать далее</a><hr/>        
                     {% if user.username == object.author %}
                     <a href="{% url 'article_edit' article.pk %}">Изменить</a> | <a href="{% url 'article_delete' article.pk %}">Удалить</a>{% endif %}                    
                     <br/><br/>

@@ -31,14 +31,15 @@
                 <div class="toggle"></div>
             </header>
 
-            <video src="{% static 'mp4/relax_video.mp4'%}" muted loop autoplay></video>
 
             <div class="overlay"></div>
 
             <div class="text">
                     <h2>Статья</h2>
-                    <form action="" method="post">{% csrf_token %}
+                    <form action="" method="post" enctype="multipart/form-data">{% csrf_token %}
                         {{ form.as_p }}
+                          <input type="file" name="myfile1">
+                        <button type="submit">Загрузка</button>
                         <button class="btn btn-success ml-2" type="submit">Опубликовать</button>
                     </form>
             </div>
