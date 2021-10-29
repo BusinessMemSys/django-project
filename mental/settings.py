@@ -1,12 +1,11 @@
 from pathlib import Path
 import os
-import whitenoise
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-esp68+ox!l&0f-wij_5@yxf8)bswwpq6wloro3a%w*uq)5sr66'
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1','chill-web-site.herokuapp.com']
 
@@ -28,13 +27,14 @@ INSTALLED_APPS = [
     'users',
     'pages',
     'articles',
+    'my_account',
 ]
 
 AUTH_USER_MODEL = 'users.CustomUser'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -119,7 +119,7 @@ STATICFILES_DIRS = [
 ]
 MEDIA_URL = '/media/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 TIME_ZONE = 'Asia/Almaty'
 
