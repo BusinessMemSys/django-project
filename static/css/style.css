@@ -106,7 +106,15 @@ a{
     object-fit: cover;
     opacity: 0.8;
 }
-
+.showcase img{
+	position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.8;
+}
 /*для meditation*/
 .slider{
     width: 100%;
@@ -222,6 +230,11 @@ input[name="r"]{
 .text-article{
     position: relative;
     z-index: 10;   
+}
+img.image{ 
+    width: 50%;
+    height: 50%;
+    border: 10px; 
 }
 .text-article h2{
     font-size: 5em;
